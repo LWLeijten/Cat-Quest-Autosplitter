@@ -1,16 +1,22 @@
 state("Cat Quest")
 {
-	// menu = 6, loading = 7, lore cutscene = 4, in game = 3
-	uint scene : 0xFFB710;
-
 	/*
-		Pointerscan 1* gedaan, nu herhalen-
+		SCENE INDEX VALUES:"
+		Menu = 6
+		Loading = 7
+		Intro Cutscene = 4
+		In game = 3
+
 		MAIN QUEST LINE INDEX VALUES:
+		MainQuest_001_PC = 0 -> 16 -> 44
 		MainQuest_002 = 74
 		MainQuest_003 = 60
 	*/
 
-	// Addresses for quests
+	// Address for scene
+	uint scene : 0xFFB710;
+
+	// Address for MainQuestIndex
 }
 
 start
