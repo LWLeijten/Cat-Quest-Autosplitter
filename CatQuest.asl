@@ -1,6 +1,13 @@
 state("Cat Quest")
 {
 	/*
+		Autosplitter for the game Cat Quest.
+		Category: Any% (Old Patch)
+		Written by: Lighten95.
+		Twitch: https://www.twitch.tv/lighten95
+		Discord: https://discord.gg/s9Fvjde
+		Github: https://github.com/LWLeijten/Cat-Quest-Autosplitter
+
 		SCENE INDEX VALUES:
 		Menu = 6, Loading = 7, Intro Cutscene = 4, In game = 3
 
@@ -15,7 +22,7 @@ state("Cat Quest")
 		+MainQuest_012(Done) = 19
 
 		USEFUL SIDE QUEST INDEX VALUES:
-		+Waterwalking = 2 -> -1
+		+Waterwalking = 7 -> 38
 -	*/
 
 	// Static address for current scene
@@ -24,8 +31,8 @@ state("Cat Quest")
 	// Pointer for MainQuestIndex
 	uint mainQuest : 0x1046078, 0x20, 0xAC, 0x6D8, 0xC, 0x4C;
 
-	// Pointer for SideQuestIndex
-	uint sideQuest : 0x1046078, 0x20, 0xAC, 0x6D8, 0xC, 0x4C;
+	// Pointer for WaterWalkingQuest
+	uint sideQuest : 0x1046070, 0x20, 0x94, 0x618, 0xC, 0x50 ;
 }
 
 start
@@ -39,7 +46,7 @@ split
 {
 	// Check for completed quests
 	bool fireDragon = (old.mainQuest == 16 && current.mainQuest == 30);
-	bool waterWalking = (old.sideQuest == 2 && current.sideQuest == -1);
+	bool waterWalking = (old.sideQuest == 36 && current.sideQuest == 38);
 	bool waterDragon = (old.mainQuest == 6 && current.mainQuest == 17);
 	bool arcanaDragon = (old.mainQuest == 7 && current.mainQuest == 17);
 	bool grandpaw = (old.mainQuest == 49 && current.mainQuest == 38);
