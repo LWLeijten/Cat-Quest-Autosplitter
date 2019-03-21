@@ -27,6 +27,7 @@ startup
 	settings.Add("icedrag", true, "Ice Dragon Quest");
 	settings.Add("arcanadrag", true, "Arcana Dragon Quest");
 	settings.Add("grandpaw", true, "Grandpaw Quest");
+	settings.Add("end", true, "End of speedrun");
 }
 
 start
@@ -44,7 +45,7 @@ split
 	bool iceDragon = settings["icedrag"] && old.mainQuest == 6 && current.mainQuest == 17;
 	bool arcanaDragon = settings["arcanadrag"] && old.mainQuest == 7 && current.mainQuest == 17;
 	bool grandpaw = settings["grandpaw"] && old.mainQuest == 49 && current.mainQuest == 38;
-	bool done = (old.mainQuest == 72 && current.mainQuest == 19);
+	bool done = settings["end"] && old.mainQuest == 72 && current.mainQuest == 19;
 
 	return (fireDragon || waterWalking || iceDragon || arcanaDragon || grandpaw || done);
 }
