@@ -25,6 +25,7 @@ state("Cat Quest")
 startup
 {
 	// Making the splits optional using the settings menu.
+	settings.Add("intro", false, "Introduction");
 	settings.Add("firedrag", true, "Fire Dragon Quest");
 	settings.Add("waterwalk", true, "Water Walking Quest");
 	settings.Add("goldkey", false, "Golden Key Unlock");
@@ -44,6 +45,7 @@ start
 split
 {
 	// Check for completed quests
+	bool intro = settings["intro"] && old.mainQuest == 74  && current.mainQuest == 60;
 	bool fireDragon = settings["firedrag"] && old.mainQuest == 16 && current.mainQuest == 30;
 	bool waterWalking = settings["waterwalk"] && old.sideQuest == 36 && current.sideQuest == 38;
 	bool goldenKey = settings["goldkey"] && old.unlocks == 26 && current.unlocks == 27;
@@ -52,5 +54,5 @@ split
 	bool grandpaw = settings["grandpaw"] && old.mainQuest == 49 && current.mainQuest == 38;
 	bool done = settings["end"] && old.mainQuest == 72 && current.mainQuest == 19;
 
-	return (fireDragon || waterWalking || goldenKey || iceDragon || arcanaDragon || grandpaw || done);
+	return (intro || fireDragon || waterWalking || goldenKey || iceDragon || arcanaDragon || grandpaw || done);
 }
