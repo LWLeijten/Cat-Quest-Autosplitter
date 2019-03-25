@@ -28,11 +28,16 @@ startup
 	settings.Add("intro", false, "Introduction");
 	settings.Add("firedrag", true, "Fire Dragon Quest");
 	settings.Add("waterwalk", true, "Water Walking Quest");
-	settings.Add("goldkey", false, "Golden Key Unlock");
+	settings.Add("goldkey", true, "Golden Key Unlock");
 	settings.Add("icedrag", true, "Ice Dragon Quest");
 	settings.Add("arcanadrag", true, "Arcana Dragon Quest");
 	settings.Add("grandpaw", true, "Grandpaw Quest");
 	settings.Add("end", true, "End of speedrun");
+}
+
+init
+{
+	vars.hasKey = false;
 }
 
 start
@@ -48,11 +53,18 @@ split
 	bool intro = settings["intro"] && old.mainQuest == 74  && current.mainQuest == 60;
 	bool fireDragon = settings["firedrag"] && old.mainQuest == 16 && current.mainQuest == 30;
 	bool waterWalking = settings["waterwalk"] && old.sideQuest == 36 && current.sideQuest == 38;
-	bool goldenKey = settings["goldkey"] && old.unlocks == 26 && current.unlocks == 27;
 	bool iceDragon = settings["icedrag"] && old.mainQuest == 6 && current.mainQuest == 17;
 	bool arcanaDragon = settings["arcanadrag"] && old.mainQuest == 7 && current.mainQuest == 17;
 	bool grandpaw = settings["grandpaw"] && old.mainQuest == 49 && current.mainQuest == 38;
 	bool done = settings["end"] && old.mainQuest == 72 && current.mainQuest == 19;
+	bool goldenKey = false;
+
+	// More complex check for the gold key
+	if(settings["goldkey"] && old.unlocks == 26 && current.unlocks == 27 && !vars.hasKey)
+	{
+		goldenKey = true;
+		vars.hasKey = true;
+	}
 
 	return (intro || fireDragon || waterWalking || goldenKey || iceDragon || arcanaDragon || grandpaw || done);
 }
